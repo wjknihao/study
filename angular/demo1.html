@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
+    <style>
+        .red {
+            background: red;
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        .green {
+            background: green;
+        }
+    </style>
+</head>
+
+<body ng-app="myApp">
+
+
+<on-blur name="wjk" type="green" address="北京"></on-blur>
+
+<script>
+    //angularjs指令封装是必须处于一个父元素下
+    var app = angular.module("myApp", []);
+    app.directive('onBlur', function () {
+        return {
+            restrict: "AE",
+            replace: true,
+            scope: {
+                name: "@",
+                address: "@",
+                type: "@",
+            },
+            template: '<div  ng-class="type" ng-click="myclick()">' +
+                '<input type="text" ng-model="zzz">' +
+                'name:{{name}} address:{{address}} wjk:{{zzz}}</div>',
+            link: function ($scope, elem, attr, ctrl) {
+                $scope.myclick = function () {
+                    $scope.type = "red"
+                }
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>
